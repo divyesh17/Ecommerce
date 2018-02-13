@@ -187,13 +187,13 @@ html {
 	width: 10rem;
 }
 
-.category__name:hover {
+/*.category__name:hover {
 	background-color: #a5b6dc;
 	border-radius: 5px;
 	box-shadow: 0px 8px 6px 0px rgba(0,0,0,0.2);
-}
+}*/
 
-.category__name:focus {
+.category__name--focus, .category__name:hover  {
 	background-color: #6cbb3b;
 	border-radius: 5px;
 	box-shadow: 0px 8px 6px 0px rgba(0,0,0,0.2);

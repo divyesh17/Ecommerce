@@ -1,41 +1,42 @@
-import React, { Component } from 'react';
-// import './CSS/App.css';
-import Header from './Header';
-import ItemSection from './ItemSection';
-import './CSS/homeStyle.css';
-import octopus from './index';
+import React from 'react';
+import homeOctopus from './home/homeController';
+import bookOctopus from './bookDetail/bookDetailController';
+import HomeView from './home/HomeView';
+import BookDetailView from './bookDetail/BookDetailView'
+import { Switch, Route } from 'react-router-dom'
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filterCategory : 'All'
-        }
-        this.onCategoryChange = this.onCategoryChange.bind(this);
-    }
+const Home = () => {
+    homeOctopus.init();
+    return <HomeView
+                books={homeOctopus.getBookData()}
+                cartValue={homeOctopus.getCartValue()}
+                category={homeOctopus.getCategory()}
+            />
+};
 
-    onCategoryChange(e) {
-        this.setState (
-            {
-                filterCategory: octopus.clickEventOnCategoryNav(e)
-            }
-        );
-    }
+const BookLayout = () => {
+    //alert(5);
+    bookOctopus.init();
+    return <BookDetailView
+                bookObj={bookOctopus.getBookDetailObj()}
+                cartValue={bookOctopus.getCartValue()}
+                isBookAlreadyInCart={bookOctopus.isBookAlreadyInCart()}
+            />
+};
 
-    render() {
-        return (
-            <div>
-                <Header
-                    category={this.props.category}
-                    onCategoryChange={this.onCategoryChange}
-                />
-                <ItemSection
-                    books={this.props.books}
-                    filterCategory={this.state.filterCategory}
-                />
-            </div>
-        );
-    }
-}
+const MyRouter = () => (
+    <Switch>
+        <Route path='/index.html' component={Home}/>
+        <Route path exact='/' component={Home}/>
+        <Route path='/bookLayout.html' component={BookLayout}/>
+        {/*<Route path='/cart.html' component={Cart}/>*/}
+    </Switch>
+);
+
+const App = () => (
+    <div>
+        <MyRouter/>
+    </div>
+);
 
 export default App;
