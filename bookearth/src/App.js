@@ -1,28 +1,8 @@
 import React from 'react';
-import homeOctopus from './home/homeController';
-import bookOctopus from './bookDetail/bookDetailController';
-import HomeView from './home/HomeView';
-import BookDetailView from './bookDetail/BookDetailView'
+import BookLayout from './bookDetail/bookDetailController';
+import Home from './home/homeController';
 import { Switch, Route } from 'react-router-dom'
 
-const Home = () => {
-    homeOctopus.init();
-    return <HomeView
-                books={homeOctopus.getBookData()}
-                cartValue={homeOctopus.getCartValue()}
-                category={homeOctopus.getCategory()}
-            />
-};
-
-const BookLayout = () => {
-    //alert(5);
-    bookOctopus.init();
-    return <BookDetailView
-                bookObj={bookOctopus.getBookDetailObj()}
-                cartValue={bookOctopus.getCartValue()}
-                isBookAlreadyInCart={bookOctopus.isBookAlreadyInCart()}
-            />
-};
 
 const MyRouter = () => (
     <Switch>

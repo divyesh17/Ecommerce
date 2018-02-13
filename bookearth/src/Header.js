@@ -22,7 +22,7 @@ class SearchBar extends Component {
     }
 
     handleChange(e) {
-        this.props.onFilterTextChange(e);
+        this.props.onFilterTextChange(e.target.value);
     }
 
     render() {
@@ -109,7 +109,9 @@ class Category extends Component {
     }
 
     handleClick(e) {
-        this.props.onCategoryChange(e);
+        if(e.target.closest(".category__name")) {
+            this.props.onCategoryChange(e.target.dataset.category);
+        }
     }
 
     render() {

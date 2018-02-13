@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import ItemSection from './ItemSectionHome';
 import '../CSS/homeStyle.css';
-import octopus from './homeController';
 
 class HomeView extends Component {
     constructor(props) {
@@ -17,20 +16,20 @@ class HomeView extends Component {
         this.handleClickOnBook = this.handleClickOnBook.bind(this);
     }
 
-    handleCategoryChange(e) {
+    handleCategoryChange(categoryName) {
         this.setState ({
-            filterCategory: octopus.clickEventOnCategoryNav(e)
+            filterCategory: categoryName
         });
     }
 
-    handleFilterTextChange(e) {
+    handleFilterTextChange(searchValue) {
         this.setState ({
-            filterText: octopus.changeEventOnSearch(e)
+            filterText: searchValue
         });
     }
 
     handleClickOnBook(e) {
-        octopus.clickEventOnBook(e);
+        this.props.clickEventOnBook(e);
     }
 
     render() {

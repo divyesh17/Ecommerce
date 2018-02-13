@@ -1,4 +1,6 @@
+import React from 'react'
 import BOOKS from "../data/allBooks.js";
+import HomeView from './HomeView';
 
 /* ============================ MODEL ==================================== */
 
@@ -16,20 +18,10 @@ let octopus = {
         this.updateCategory();
     },
 
-    changeEventOnSearch: function(event) {
-        return event.target.value;
-    },
-
     clickEventOnBook: function(event) {
         let itemDetailDiv = event.target.closest(".item-details");
         if(itemDetailDiv !== null)
             octopus.storeBookId(itemDetailDiv.dataset.id);
-    },
-
-    clickEventOnCategoryNav: function(event) {
-        if(event.target.closest(".category__name")) {
-            return event.target.dataset.category;
-        }
     },
 
     getBookData: function () {
@@ -58,4 +50,16 @@ let octopus = {
     }
 };
 
-export default octopus;
+/* ============================= VIEW ================================== */
+
+const Home = () => {
+    octopus.init();
+    return <HomeView
+        books={octopus.getBookData()}
+        cartValue={octopus.getCartValue()}
+        category={octopus.getCategory()}
+        clickEventOnBook={octopus.clickEventOnBook}
+    />
+};
+
+export default Home;

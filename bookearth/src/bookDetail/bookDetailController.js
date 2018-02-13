@@ -1,5 +1,7 @@
 import BOOKS from "../data/allBooks.js";
 import React from 'react';
+import BookDetailView from './BookDetailView';
+
 /* ============================ MODEL ==================================== */
 
 let model = {
@@ -78,4 +80,17 @@ let octopus = {
     }
 };
 
-export default octopus;
+/* ============================= VIEW ================================== */
+
+const BookLayout = () => {
+    //alert(5);
+    octopus.init();
+    return <BookDetailView
+        bookObj={octopus.getBookDetailObj()}
+        cartValue={octopus.getCartValue()}
+        isBookAlreadyInCart={octopus.isBookAlreadyInCart()}
+        clickFunction={octopus.clickFunction}
+    />
+};
+
+export default BookLayout;

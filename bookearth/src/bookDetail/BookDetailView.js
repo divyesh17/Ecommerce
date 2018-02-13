@@ -4,7 +4,6 @@ import Header from '../Header';
 import BookSection from './BookDetailSection';
 import '../CSS/homeStyle.css';
 import '../CSS/bookStyle.css';
-import octopus from './bookDetailController.js';
 
 class BookDetailView extends Component {
     constructor(props) {
@@ -21,7 +20,7 @@ class BookDetailView extends Component {
     handleClickOnCartButton(e) {
         if(this.state.isBookAlreadyInCart === false) {
             this.setState({
-                cartValue: octopus.clickFunction(e),
+                cartValue: this.props.clickFunction(e),
                 isBookAlreadyInCart: true
             });
         }
