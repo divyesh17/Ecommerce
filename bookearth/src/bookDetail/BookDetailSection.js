@@ -34,7 +34,7 @@ class CartButton extends Component {
                 <button className="cart-button-block__button">
                     {text}
                 </button>
-                <a href="%PUBLIC_URL%/cart.html">
+                <a href="/cart.html">
                     <button className="buy-button-block__button">
                         Buy Now
                     </button>

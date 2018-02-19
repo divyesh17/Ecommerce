@@ -62,7 +62,7 @@ class Cart extends Component {
     render() {
         return (
             <div className="cart">
-                <a className="cart__anchor" href="../public/%PUBLIC_URL%/cart.html">
+                <a className="cart__anchor" href="cart.html">
                     <img className="cart__img" src={cartImg} alt="BookEarth"/>
                     <div className="cart__cart-text-value">
                         <span>Cart({this.props.cartValue})</span>
@@ -139,7 +139,7 @@ class Category extends Component {
 class Header extends Component {
     render() {
         return (
-            <header className="header" data-pageName={this.props.pageName}>
+            <header className="header" data-pagename={this.props.pageName}>
                 <CartAndSearch
                     cartValue={this.props.cartValue}
                     filterText={this.props.filterText}

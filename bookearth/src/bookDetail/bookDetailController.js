@@ -4,7 +4,7 @@ import BookDetailView from './BookDetailView';
 
 /* ============================ MODEL ==================================== */
 
-let model = {
+const model = {
     bookId: null,
     bookDetailObj: null,
     cartValue: 0,
@@ -13,7 +13,7 @@ let model = {
 
 /* ============================= OCTOPUS ================================== */
 
-let octopus = {
+const octopus = {
 
     init: function() {
         this.initItemIdArray();
@@ -23,9 +23,9 @@ let octopus = {
     },
 
     addBookIdToLocalStorage: function() {
-        if(this.isBookAlreadyInCart())
+        if(octopus.isBookAlreadyInCart())
             return;
-        model.itemIdArray.push(model.bookId);
+        model.itemIdArray.push({bookId: model.bookId, quantity: 1});
         window.localStorage.setItem("cart",JSON.stringify(model.itemIdArray));
     },
 
@@ -33,10 +33,10 @@ let octopus = {
         if(event.target.closest(".cart-button-block__button")
             || event.target.closest(".buy-button-block__button"))
         {
-            this.addBookIdToLocalStorage();
-            this.updateCartValue();
+            octopus.addBookIdToLocalStorage();
+            octopus.updateCartValue();
         }
-        return this.getCartValue();
+        return octopus.getCartValue();
     },
 
     getBookDetailObj: function() {
@@ -56,7 +56,7 @@ let octopus = {
     },
 
     initBookDetailObj: function() {
-        model.bookDetailObj = BOOKS[this.getBookId()];
+        model.bookDetailObj = BOOKS[octopus.getBookId()];
     },
 
     initBookId: function() {
@@ -71,8 +71,12 @@ let octopus = {
     },
 
     isBookAlreadyInCart: function() {
-        let matchedElemInd = model.itemIdArray.indexOf(model.bookId);
-        return (matchedElemInd === -1)?false:true;
+        let matchedElemInd = model.itemIdArray.reduce((matchedInd,bookObj,curInd) => {
+            if(bookObj.bookId === model.bookId)
+                matchedInd = curInd;
+            return matchedInd;
+        },-1);
+        return matchedElemInd !== -1;
     },
 
     updateCartValue: function() {

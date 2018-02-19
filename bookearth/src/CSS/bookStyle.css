@@ -2,13 +2,9 @@ html {
 	font-size: 62.5%;
 }
 
-.header[data-pageName=bookDetail] {
+.header[data-pagename=bookDetail] {
 	height: 8rem;
 	margin-bottom: 2rem;
-}
-
-li {
-	list-style: none;
 }
 
 .book-info-section {
@@ -39,7 +35,7 @@ li {
 
 .book-img-block:hover {
 	background-color: #E6EAF3;
-//box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+//box-shadow: 0 .8rem 1.6rem 0 rgba(0,0,0,0.2);
 }
 
 .buttons-block {
@@ -73,7 +69,7 @@ li {
 }
 
 .buy-button-block__button:hover, .cart-button-block__button:hover {
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0 .8rem 1.6rem 0 rgba(0,0,0,0.2);
 }
 
 .book-details {
@@ -84,7 +80,7 @@ li {
 
 .book-name {
 	color: #680909;
-	font-size: 25px;
+	font-size: 2.5rem;
 }
 
 .price-and-seller {
