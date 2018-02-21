@@ -20,12 +20,22 @@ let octopus = {
 
     clickEventOnBook: function(event) {
         let itemDetailDiv = event.target.closest(".item-details");
-        if(itemDetailDiv !== null)
-            octopus.storeBookId(itemDetailDiv.dataset.id);
+        if(itemDetailDiv !== null) {
+            event.preventDefault();
+            let itemDetailsAnchor = itemDetailDiv.getElementsByClassName('item-details__anchor')[0];
+            let url = new URL(itemDetailsAnchor.href);
+            let urlParams = new URLSearchParams(url.search);
+            urlParams.append('itemId', itemDetailDiv.dataset.id);
+            url.search = urlParams.toString();
+            window.location.href = url.toString();
+            //octopus.storeBookId(itemDetailDiv.dataset.id);
+        }
     },
 
     getBookData: function () {
-        return BOOKS;
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(BOOKS), 5000);
+        })
     },
 
     getCartValue: function() {
@@ -55,7 +65,7 @@ let octopus = {
 const Home = () => {
     octopus.init();
     return <HomeView
-        books={octopus.getBookData()}
+        getBookData={octopus.getBookData}
         cartValue={octopus.getCartValue()}
         category={octopus.getCategory()}
         clickEventOnBook={octopus.clickEventOnBook}

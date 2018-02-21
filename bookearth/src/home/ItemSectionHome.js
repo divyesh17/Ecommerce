@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import books from "../data/allBooks";
+import books from '../data/allBooks';
+import loadingGif from '../assets/images/loader.gif'
 
 class ItemDetails extends Component {
     render() {
@@ -26,6 +27,10 @@ class ItemDetails extends Component {
 class ItemSection extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            booksData: {},
+            currentStatus: 'Loading...'
+        };
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -33,9 +38,18 @@ class ItemSection extends Component {
         this.props.clickOnBook(e);
     }
 
+    componentWillMount() {
+        this.props.getBookData().then((booksData) => {
+            this.setState({
+                booksData,
+                currentStatus: ''
+            });
+        })
+    }
+
     render() {
         let allBooks = [];
-        for(let bookId in this.props.books) {
+        for(let bookId in this.state.booksData) {
             if(books.hasOwnProperty(bookId)) {
                 //console.log(this.props.filterCategory);
                 let bookObj = books[bookId];
@@ -47,14 +61,25 @@ class ItemSection extends Component {
                 else if (this.props.filterCategory.toLowerCase() === 'all')
                     allBooks.push(<ItemDetails bookObj={bookObj} key={bookId}/>);
                 else if (this.props.filterCategory.toLowerCase() ===
-                    bookObj.category[0].toLowerCase()) {
+                            bookObj.category[0].toLowerCase()) {
                     allBooks.push(<ItemDetails bookObj={bookObj} key={bookId}/>);
                 }
             }
         }
         return (
             <section className="items-box" onClick={this.handleClick}>
-                {allBooks}
+                {
+                    this.state.currentStatus ?
+                        <img src={loadingGif}
+                             alt={this.state.currentStatus}
+                             style={{width:'10rem',
+                                    height:'10rem',
+                                    position:'absolute',
+                                    top:'50%'
+                             }}
+                        /> :
+                        allBooks
+                }
             </section>
         );
     };

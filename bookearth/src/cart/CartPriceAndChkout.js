@@ -45,7 +45,7 @@ class CheckoutBlock extends Component {
         return (
             <div className="checkout-block">
                 <div className="continue-shopping">
-                    <a className="continue-shopping__anchor" href="home.html">
+                    <a className="continue-shopping__anchor" href="index.html">
                         <span className="continue-shopping__text">Continue Shopping</span>
                     </a>
                 </div>

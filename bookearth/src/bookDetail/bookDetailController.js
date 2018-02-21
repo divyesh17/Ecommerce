@@ -61,7 +61,8 @@ const octopus = {
 
     initBookId: function() {
         //get bookId from local storage
-        model.bookId = window.localStorage.getItem("bookId");
+        let urlParams = new URLSearchParams(window.location.search);
+        model.bookId = urlParams.get('itemId');
     },
 
     initItemIdArray: function() {

@@ -46,7 +46,7 @@ class HomeView extends Component {
                     pageName={'home'}
                 />
                 <ItemSection
-                    books={this.props.books}
+                    getBookData={this.props.getBookData}
                     filterCategory={this.state.filterCategory}
                     filterText={this.state.filterText}
                     clickOnBook={this.handleClickOnBook}
